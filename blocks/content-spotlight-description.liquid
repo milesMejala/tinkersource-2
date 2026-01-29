@@ -1,5 +1,20 @@
-{% content_for 'block', type: 'heading', id: 'heading' %}
-{% content_for 'block', type: 'text', id: 'text' %}
+<div class="description">
+  {% content_for 'block', type: 'heading', id: 'heading' %}
+  {% content_for 'block', type: 'text', id: 'text' %}
+  {% content_for 'block', type: 'button', id: 'button' %}
+</div>
+
+{% stylesheet %}
+  .description {
+    height: 296px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .description > :nth-child(3) {
+    margin-top: auto;
+  }
+{% endstylesheet %}
 
 {% schema %}
 {
@@ -10,6 +25,9 @@
     },
     {
       "type": "text"
+    },
+    {
+      "type": "button"
     }
   ],
   "presets": [
