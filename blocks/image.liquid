@@ -1,9 +1,35 @@
-<p>Image goes here</p>
+<div class="block-image" {{ block.shopify_attributes }}>
+  {% if block.settings.image %}
+    {{ block.settings.image | image_url: width: 296, height: 296 | image_tag: loading: 'lazy' }}
+  {% else %}
+    {{ 'image' | placeholder_svg_tag: 'block-image__placeholder' }}
+  {% endif %}
+</div>
+
+{% stylesheet %}
+  .block-image {
+    width: 296px;
+    aspect-ratio: 1 / 1;
+    display: grid;
+    place-items: center;
+  }
+
+  .block-image__placeholder {
+    width: 100%;
+    height: 100%;
+  }
+{% endstylesheet %}
 
 {% schema %}
 {
   "name": "Image",
-  "settings": [],
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    }
+  ],
   "blocks": [],
   "presets": [
     {
