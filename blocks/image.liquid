@@ -1,4 +1,8 @@
-<div class="block-image" {{ block.shopify_attributes }}>
+<div
+  class="block-image"
+  {{ block.shopify_attributes }}
+  style="--corner-radius: {{ block.settings.corner_radius }}px"
+>
   {% if block.settings.image %}
     {{ block.settings.image | image_url: width: 296, height: 296 | image_tag: loading: 'lazy' }}
   {% else %}
@@ -8,6 +12,8 @@
 
 {% stylesheet %}
   .block-image {
+    border-radius: var(--corner-radius);
+    overflow: hidden;
     width: 296px;
     aspect-ratio: 1 / 1;
     display: grid;
@@ -28,6 +34,16 @@
       "type": "image_picker",
       "id": "image",
       "label": "Image"
+    },
+    {
+      "type": "range",
+      "id": "corner_radius",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Corner radius",
+      "default": 0
     }
   ],
   "blocks": [],

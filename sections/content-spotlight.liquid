@@ -3,6 +3,7 @@
 >
   <div
     class="content-spotlight-container color-{{ section.settings.color_scheme_2 }}"
+    style="--corner-radius: {{ section.settings.corner_radius }}px"
   >
     {% content_for 'block', type: 'content-spotlight-description', id: 'description' %}
     {% content_for 'block', type: 'image', id: 'spotlight-image' %}
@@ -15,12 +16,18 @@
   }
 
   .content-spotlight-container {
+    border-radius: var(--corner-radius);
+    padding: 44px 40px 44px 64px;
     background-color: var(--color-background);
     max-width: 1024px;
+    max-height: 384px;
     margin: 0 auto;
     display: flex;
-    gap: 2rem;
-    justify-content:;
+    gap: 1rem;
+    justify-content: center;
+  }
+  .content-spotlight-container > :first-child {
+    flex: 3;
   }
 {% endstylesheet %}
 
@@ -39,6 +46,16 @@
       "id": "color_scheme_2",
       "default": "dark",
       "label": "Inner color scheme"
+    },
+    {
+      "type": "range",
+      "id": "corner_radius",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "label": "Corner radius",
+      "default": 0
     }
   ],
   "blocks": [
