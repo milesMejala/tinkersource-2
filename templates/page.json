@@ -12,9 +12,79 @@
     "main": {
       "type": "page",
       "settings": {}
+    },
+    "content_spotlight_LPenUt": {
+      "type": "content-spotlight",
+      "blocks": {
+        "description": {
+          "type": "content-spotlight-description",
+          "static": true,
+          "settings": {},
+          "blocks": {
+            "heading_GmzbH3": {
+              "type": "heading",
+              "name": "Heading",
+              "settings": {
+                "heading": "Sample heading",
+                "heading_level": "h1"
+              },
+              "blocks": {}
+            },
+            "text_CprPci": {
+              "type": "text",
+              "name": "t:general.text",
+              "settings": {
+                "text": "Text",
+                "text_style": "text--title",
+                "alignment": "left"
+              },
+              "blocks": {}
+            },
+            "heading": {
+              "type": "heading",
+              "static": true,
+              "settings": {
+                "heading": "Lorem ipsum dolor sit amet consectetur adipiscing.",
+                "heading_level": "h1"
+              },
+              "blocks": {}
+            },
+            "text": {
+              "type": "text",
+              "static": true,
+              "settings": {
+                "text": "Lorem ipsum dolor sit amet consectetur. Sed tellus semper sagittis sed venenatis. Cum lectus eros accumsan in aliquam donec amet molestie. Enim in vestibulum duis lectus elementum. Hendrerit augue consectetur metus nulla iaculis sed.",
+                "text_style": "text--normal",
+                "alignment": "left"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "heading_GmzbH3",
+            "text_CprPci"
+          ]
+        },
+        "spotlight-image": {
+          "type": "image",
+          "static": true,
+          "settings": {
+            "image": "shopify://shop_images/terrible-explosion-of-a-nuclear-bomb-with-a-mushro-cropped_a1ab1cf9-dcf8-4dce-a4c8-0d1c671f1eb7.png",
+            "corner_radius": 24
+          },
+          "blocks": {}
+        }
+      },
+      "name": "Content spotlight",
+      "settings": {
+        "color_scheme": "default",
+        "color_scheme_2": "scheme_2",
+        "corner_radius": 68
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "content_spotlight_LPenUt"
   ]
 }
