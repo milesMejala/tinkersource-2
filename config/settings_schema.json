@@ -57,26 +57,76 @@
     "name": "t:general.colors",
     "settings": [
       {
-        "type": "color",
-        "id": "background_color",
-        "default": "#FFFFFF",
-        "label": "t:labels.background"
-      },
-      {
-        "type": "color",
-        "id": "foreground_color",
-        "default": "#333333",
-        "label": "t:labels.foreground"
-      },
-      {
-        "type": "range",
-        "id": "input_corner_radius",
-        "min": 0,
-        "max": 10,
-        "step": 1,
-        "unit": "px",
-        "label": "t:labels.input_corner_radius",
-        "default": 4
+        "type": "color_scheme_group",
+        "id": "color_schemes",
+        "definition": [
+          {
+            "type": "color",
+            "id": "background",
+            "label": "Background",
+            "default": "#E8F9FC"
+          },
+          {
+            "type": "color",
+            "id": "text",
+            "label": "Text",
+            "default": "#333333"
+          },
+          {
+            "type": "color",
+            "id": "button",
+            "label": "Primary Button",
+            "default": "#03045e"
+          },
+          {
+            "type": "color",
+            "id": "button_label",
+            "label": "Primary Button Label",
+            "default": "#FFFFFF"
+          },
+          {
+            "type": "color",
+            "id": "button_border",
+            "label": "Primary Button Border",
+            "default": "#000000"
+          },
+          {
+            "type": "color",
+            "id": "secondary_button",
+            "label": "Secondary Button",
+            "default": "#ade8f4"
+          },
+          {
+            "type": "color",
+            "id": "secondary_button_label",
+            "label": "Secondary Button Label",
+            "default": "#03045e"
+          },
+          {
+            "type": "color",
+            "id": "secondary_button_border",
+            "label": "Secondary Button Border",
+            "default": "#ade8f4"
+          },
+          {
+            "type": "color",
+            "id": "shadow",
+            "label": "Shadow",
+            "default": "#121212"
+          }
+        ],
+        "role": {
+          "text": "text",
+          "background": "background",
+          "links": "secondary_button_label",
+          "icons": "text",
+          "primary_button": "button",
+          "on_primary_button": "button_label",
+          "primary_button_border": "button_border",
+          "secondary_button": "secondary_button",
+          "on_secondary_button": "secondary_button_label",
+          "secondary_button_border": "secondary_button_border"
+        }
       }
     ]
   }

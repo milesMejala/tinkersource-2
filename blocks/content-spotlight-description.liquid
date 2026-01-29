@@ -1,0 +1,21 @@
+{% content_for 'block', type: 'heading', id: 'heading' %}
+{% content_for 'block', type: 'text', id: 'text' %}
+
+{% schema %}
+{
+  "name": "Description",
+  "blocks": [
+    {
+      "type": "heading"
+    },
+    {
+      "type": "text"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Description"
+    }
+  ]
+}
+{% endschema %}

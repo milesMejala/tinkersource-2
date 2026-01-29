@@ -8,5 +8,35 @@
  * ------------------------------------------------------------
  */
 {
-  "current": {}
+  "current": {
+    "color_schemes": "default"
+  },
+  "presets": {
+    "default": {
+      "color_schemes": {
+        "default": {
+          "background": "#E8F9FC",
+          "text": "#333333",
+          "button": "#03045e",
+          "button_label": "#FFFFFF",
+          "button_border": "#000000",
+          "secondary_button": "#ade8f4",
+          "secondary_button_label": "#03045e",
+          "secondary_button_border": "#ade8f4",
+          "shadow": "#121212"
+        },
+        "dark": {
+          "background": "#E8F9FC",
+          "text": "#333333",
+          "button": "#03045e",
+          "button_label": "#FFFFFF",
+          "button_border": "#000000",
+          "secondary_button": "#ade8f4",
+          "secondary_button_label": "#03045e",
+          "secondary_button_border": "#ade8f4",
+          "shadow": "#121212"
+        }
+      }
+    }
+  }
 }

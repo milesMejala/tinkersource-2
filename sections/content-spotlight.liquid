@@ -1,0 +1,62 @@
+<section
+  class="content-spotlight-section color-{{ section.settings.color_scheme }}"
+>
+  <div
+    class="content-spotlight-container color-{{ section.settings.color_scheme_2 }}"
+  >
+    {% content_for 'block', type: 'content-spotlight-description', id: 'description' %}
+    {% content_for 'block', type: 'image', id: 'spotlight-image' %}
+  </div>
+</section>
+
+{% stylesheet %}
+  .content-spotlight-section {
+    background-color: var(--color-background);
+  }
+
+  .content-spotlight-container {
+    background-color: var(--color-background);
+    max-width: 1024px;
+    margin: 0 auto;
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Content spotlight",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "default": "default",
+      "label": "Background color scheme"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme_2",
+      "default": "dark",
+      "label": "Inner color scheme"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "content-spotlight-description"
+    },
+    {
+      "type": "image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Content spotlight",
+      "settings": {
+        "color_scheme": "default",
+        "color_scheme_2": "dark"
+      }
+    }
+  ]
+}
+{% endschema %}
