@@ -21,25 +21,6 @@
           "static": true,
           "settings": {},
           "blocks": {
-            "heading_GmzbH3": {
-              "type": "heading",
-              "name": "Heading",
-              "settings": {
-                "heading": "Sample heading",
-                "heading_level": "h1"
-              },
-              "blocks": {}
-            },
-            "text_CprPci": {
-              "type": "text",
-              "name": "t:general.text",
-              "settings": {
-                "text": "Text",
-                "text_style": "text--title",
-                "alignment": "left"
-              },
-              "blocks": {}
-            },
             "heading": {
               "type": "heading",
               "static": true,
@@ -58,12 +39,20 @@
                 "alignment": "left"
               },
               "blocks": {}
+            },
+            "button": {
+              "type": "button",
+              "static": true,
+              "settings": {
+                "button_text": "My Button",
+                "button_text_size": 16,
+                "button_color_scheme": "",
+                "corner_radius": 16
+              },
+              "blocks": {}
             }
           },
-          "block_order": [
-            "heading_GmzbH3",
-            "text_CprPci"
-          ]
+          "block_order": []
         },
         "spotlight-image": {
           "type": "image",
