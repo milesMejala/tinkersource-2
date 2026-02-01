@@ -9,6 +9,7 @@
  */
 {
   "current": {
+    "type_primary_font": "inter_n4",
     "color_scheme": "scheme_1",
     "content_for_index": [],
     "color_schemes": {
