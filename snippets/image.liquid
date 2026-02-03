@@ -44,8 +44,13 @@
   {% if url %}
     href="{{ url }}"
   {% endif %}
+  style="border-radius: {{ corner_radius }}px"
 >
-  {{ image | image_url: width: width, height: height, crop: crop | image_tag }}
+  {% if image %}
+    {{ image | image_url: width: width, height: height, crop: crop | image_tag }}
+  {% else %}
+    {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+  {% endif %}
 </{{ wrapper }}>
 
 {% stylesheet %}
@@ -53,12 +58,10 @@
     display: block;
     position: relative;
     overflow: hidden;
-    width: 100%;
     height: auto;
   }
 
   .image > img {
-    width: 100%;
     height: auto;
   }
 {% endstylesheet %}

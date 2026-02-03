@@ -1,28 +1,14 @@
-<div
-  class="block-image"
-  {{ block.shopify_attributes }}
-  style="--corner-radius: {{ block.settings.corner_radius }}px"
->
-  {% if block.settings.image %}
-    {{ block.settings.image | image_url: width: 296, height: 296 | image_tag: loading: 'lazy' }}
-  {% else %}
-    {{ 'image' | placeholder_svg_tag: 'block-image__placeholder' }}
-  {% endif %}
-</div>
+{% render 'image',
+  image: block.settings.image,
+  width: 296,
+  height: 296,
+  class: 'block-image',
+  corner_radius: block.settings.corner_radius
+%}
 
 {% stylesheet %}
   .block-image {
     border-radius: var(--corner-radius);
-    overflow: hidden;
-    width: 296px;
-    aspect-ratio: 1 / 1;
-    display: grid;
-    place-items: center;
-  }
-
-  .block-image__placeholder {
-    width: 100%;
-    height: 100%;
   }
 {% endstylesheet %}
 
