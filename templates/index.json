@@ -12,9 +12,26 @@
     "main": {
       "type": "hello-world",
       "settings": {}
+    },
+    "hero_mNkYfU": {
+      "type": "hero",
+      "blocks": {
+        "hero-image": {
+          "type": "image",
+          "static": true,
+          "settings": {
+            "image": "shopify://shop_images/spreading-plane-in-sky-2026-01-06-09-59-39-utc.jpg",
+            "corner_radius": 0
+          },
+          "blocks": {}
+        }
+      },
+      "name": "Hero",
+      "settings": {}
     }
   },
   "order": [
-    "main"
+    "main",
+    "hero_mNkYfU"
   ]
 }
