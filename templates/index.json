@@ -12,23 +12,35 @@
     "hero_cmkBw6": {
       "type": "hero",
       "blocks": {
-        "heading_iUXfi8": {
-          "type": "heading",
-          "settings": {
-            "heading": "Build Your Own Ultralight Aircraft",
-            "heading_level": "h1"
-          }
-        },
         "hero_image_rMKEXX": {
           "type": "hero_image",
           "settings": {
             "hero_image": "shopify://shop_images/spreading-plane-in-sky-2026-01-06-09-59-39-utc.jpg"
           }
+        },
+        "heading_iUXfi8": {
+          "type": "heading",
+          "settings": {
+            "heading": "Build Your Own Ultralight Aircraft",
+            "heading_size": 48,
+            "heading_level": "h1"
+          }
+        },
+        "button_kNLepb": {
+          "type": "button",
+          "settings": {
+            "button_text": "Get Plans",
+            "button_url": "",
+            "color_scheme": "scheme_1",
+            "button_text_size": 24,
+            "corner_radius": 12
+          }
         }
       },
       "block_order": [
+        "hero_image_rMKEXX",
         "heading_iUXfi8",
-        "hero_image_rMKEXX"
+        "button_kNLepb"
       ],
       "name": "Hero",
       "settings": {}
