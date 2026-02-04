@@ -9,29 +9,29 @@
  */
 {
   "sections": {
-    "main": {
-      "type": "hello-world",
-      "settings": {}
-    },
-    "hero_mNkYfU": {
+    "hero_cmkBw6": {
       "type": "hero",
       "blocks": {
-        "hero-image": {
-          "type": "image",
-          "static": true,
+        "hero_image_rMKEXX": {
+          "type": "hero_image",
           "settings": {
-            "image": "shopify://shop_images/spreading-plane-in-sky-2026-01-06-09-59-39-utc.jpg",
-            "corner_radius": 0
-          },
-          "blocks": {}
+            "hero_image": "shopify://shop_images/spreading-plane-in-sky-2026-01-06-09-59-39-utc.jpg"
+          }
         }
       },
+      "block_order": [
+        "hero_image_rMKEXX"
+      ],
       "name": "Hero",
+      "settings": {}
+    },
+    "main": {
+      "type": "hello-world",
       "settings": {}
     }
   },
   "order": [
-    "main",
-    "hero_mNkYfU"
+    "hero_cmkBw6",
+    "main"
   ]
 }
