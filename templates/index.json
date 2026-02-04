@@ -12,6 +12,13 @@
     "hero_cmkBw6": {
       "type": "hero",
       "blocks": {
+        "heading_iUXfi8": {
+          "type": "heading",
+          "settings": {
+            "heading": "Build Your Own Ultralight Aircraft",
+            "heading_level": "h1"
+          }
+        },
         "hero_image_rMKEXX": {
           "type": "hero_image",
           "settings": {
@@ -20,6 +27,7 @@
         }
       },
       "block_order": [
+        "heading_iUXfi8",
         "hero_image_rMKEXX"
       ],
       "name": "Hero",

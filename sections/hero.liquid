@@ -11,7 +11,25 @@
         {% liquid
           assign heading_tag = block.settings.heading_level
         %}
-        <{{ heading_tag }} {{ block.shopify_attributes }}>{{ block.settings.heading }}</{{ heading_tag }}>
+        <{{ heading_tag }}
+          class="heading"
+          style="--heading-font-size: {{ block.settings.heading_size }}px;"
+          {{ block.shopify_attributes }}
+        >
+          {{ block.settings.heading }}
+        </{{ heading_tag }}>
+      {% endif %}
+      {% if block.type == 'button' %}
+        <button
+          class="button color-{{ block.settings.color_scheme }}"
+          style="
+            --text-size: {{ block.settings.button_text_size }}px;
+            --corner-radius: {{ block.settings.corner_radius }}px;
+          "
+          {{ block.shopify_attributes }}
+        >
+          {{ block.settings.button_text }}
+        </button>
       {% endif %}
     {% endfor %}
   </div>
@@ -21,6 +39,12 @@
   .hero-section {
     height: calc(100vh - 5rem);
     position: relative;
+  }
+  .hero-section .image::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.1);
   }
   .hero-section .image {
     width: 100%;
@@ -34,9 +58,17 @@
   }
   .hero-content {
     position: absolute;
-    top: 80%;
+    top: 75%;
     left: 5%;
     z-index: 1;
+  }
+  .heading {
+    font-size: var(--heading-font-size);
+    margin-bottom: 12px;
+  }
+  .button {
+    border-radius: var(--corner-radius);
+    font-size: var(--text-size);
   }
 {% endstylesheet %}
 
@@ -68,6 +100,16 @@
           "label": "Heading"
         },
         {
+          "type": "range",
+          "id": "heading_size",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "default": 32,
+          "label": "Heading Font Size"
+        },
+        {
           "type": "select",
           "id": "heading_level",
           "label": "Heading Level",
@@ -78,6 +120,50 @@
             { "value": "h3", "label": "H3" },
             { "value": "h4", "label": "H4" }
           ]
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "Button",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "button_text",
+          "label": "Button Text",
+          "default": "Get Plans"
+        },
+        {
+          "type": "url",
+          "id": "button_url",
+          "label": "URL"
+        },
+        {
+          "type": "color_scheme",
+          "id": "color_scheme",
+          "default": "scheme_1",
+          "label": "Color Scheme"
+        },
+        {
+          "type": "range",
+          "id": "button_text_size",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "default": 16,
+          "label": "Text Size"
+        },
+        {
+          "type": "range",
+          "id": "corner_radius",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "px",
+          "default": 0,
+          "label": "Corner Radius"
         }
       ]
     }
