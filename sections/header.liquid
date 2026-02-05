@@ -29,6 +29,16 @@
   </div>
 </header>
 
+<script>
+  const header = document.querySelector('header');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 1) {
+      header.style.backgroundColor = 'var(--color-background)';
+    } else {
+      header.style.backgroundColor = 'transparent';
+    }
+  });
+</script>
 {% stylesheet %}
   header {
     position: fixed;
