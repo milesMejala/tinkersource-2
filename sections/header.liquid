@@ -8,11 +8,33 @@
     {{ shop.name | link_to: routes.root_url }}
   </h2>
 
-  <div class="header__menu">
+  <nav class="header__menu">
     {% for link in section.settings.menu.links %}
-      {{ link.title | link_to: link.url }}
+      <div class="nav-item {% if link.links != blank %}has-dropdown{% endif %}">
+        <a href="{{ link.url }}" class="nav-link">
+          {{ link.title }}
+          {% if link.links != blank %}
+            <span class="dropdown-arrow">▼</span>
+          {% endif %}
+        </a>
+
+        {% if link.links != blank %}
+          <div
+            class="dropdown"
+            {% if section.settings.transparent_header %}
+              style="background-color: transparent;"
+            {% endif %}
+          >
+            {% for child_link in link.links %}
+              <a href="{{ child_link.url }}" class="dropdown-link">
+                {{ child_link.title }}
+              </a>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
     {% endfor %}
-  </div>
+  </nav>
 
   <div class="header__icons">
     {% if shop.customer_accounts_enabled %}
@@ -31,13 +53,37 @@
 
 <script>
   const header = document.querySelector('header');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 1) {
-      header.style.backgroundColor = 'var(--color-background)';
-    } else {
-      header.style.backgroundColor = 'transparent';
-    }
-  });
+  const dropdowns = document.querySelectorAll('.dropdown');
+  const isTransparent = {{ section.settings.transparent_header | json }};
+
+  // Only apply white text color if transparent header is enabled
+  if (isTransparent) {
+    header.querySelectorAll('a').forEach((link) => {
+      link.style.color = '#fafafa';
+    });
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 1) {
+        header.style.backgroundColor = 'var(--color-background)';
+        header.querySelectorAll('a').forEach((link) => {
+          link.style.color = 'var(--color-foreground)';
+        });
+        // Update all dropdowns
+        dropdowns.forEach((dropdown) => {
+          dropdown.style.backgroundColor = 'var(--color-background)';
+        });
+      } else {
+        header.style.backgroundColor = 'transparent';
+        header.querySelectorAll('a').forEach((link) => {
+          link.style.color = '#fafafa';
+        });
+        // Reset all dropdowns to transparent
+        dropdowns.forEach((dropdown) => {
+          dropdown.style.backgroundColor = 'transparent';
+        });
+      }
+    });
+  }
 </script>
 {% stylesheet %}
   header {
@@ -50,11 +96,19 @@
     align-items: center;
     justify-content: space-between;
     background-color: var(--color-background);
+    transition: background-color 0.3s ease;
   }
   header a {
     position: relative;
     text-decoration: none;
     color: var(--color-foreground);
+    transition:
+      color 0.3s ease,
+      opacity 0.3s ease;
+  }
+
+  header a:hover {
+    opacity: 0.8;
   }
   header a sup {
     position: absolute;
@@ -69,6 +123,67 @@
   header .header__icons {
     display: flex;
     gap: 1rem;
+  }
+
+  /* Dropdown menu styles */
+  .nav-item {
+    position: relative;
+  }
+
+  .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.5rem 0;
+  }
+
+  .dropdown-arrow {
+    font-size: 0.6rem;
+    transition: transform 0.3s ease;
+  }
+
+  .nav-item:hover .dropdown-arrow {
+    transform: rotate(180deg);
+  }
+
+  .dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 200px;
+    background-color: var(--color-background);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    padding: 0.5rem 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition:
+      opacity 0.3s ease,
+      transform 0.3s ease,
+      visibility 0.3s,
+      background-color 0.3s ease;
+    z-index: 1000;
+  }
+
+  .nav-item:hover .dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .dropdown-link {
+    display: block;
+    padding: 0.75rem 1.25rem;
+    color: var(--color-foreground);
+    text-decoration: none;
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
+  }
+
+  .dropdown-link:hover {
+    background-color: rgba(0, 0, 0, 0.05);
   }
 {% endstylesheet %}
 

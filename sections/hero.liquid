@@ -13,7 +13,10 @@
         %}
         <{{ heading_tag }}
           class="heading"
-          style="--heading-font-size: {{ block.settings.heading_size }}px;"
+          style="
+            --heading-font-size: {{ block.settings.heading_size }}px;
+            --heading-color: {{ block.settings.color }};
+          "
           {{ block.shopify_attributes }}
         >
           {{ block.settings.heading }}
@@ -21,7 +24,7 @@
       {% endif %}
       {% if block.type == 'button' %}
         <button
-          class="button color-{{ block.settings.color_scheme }}"
+          class="button {{ block.settings.button_type }}"
           style="
             --text-size: {{ block.settings.button_text_size }}px;
             --corner-radius: {{ block.settings.corner_radius }}px;
@@ -44,7 +47,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.1);
+    background: rgba(0, 0, 0, 0.35);
   }
   .hero-section .image {
     width: 100%;
@@ -65,6 +68,7 @@
   .heading {
     font-size: var(--heading-font-size);
     margin-bottom: 12px;
+    color: var(--heading-color);
   }
   .button {
     border-radius: var(--corner-radius);
@@ -120,6 +124,12 @@
             { "value": "h3", "label": "H3" },
             { "value": "h4", "label": "H4" }
           ]
+        },
+        {
+          "type": "color",
+          "id": "color",
+          "label": "Color",
+          "default": "#fafafa"
         }
       ]
     },
@@ -140,10 +150,14 @@
           "label": "URL"
         },
         {
-          "type": "color_scheme",
-          "id": "color_scheme",
-          "default": "scheme_1",
-          "label": "Color Scheme"
+          "type": "select",
+          "id": "button_type",
+          "label": "Type",
+          "default": "primary",
+          "options": [
+            { "value": "primary", "label": "Primary" },
+            { "value": "secondary", "label": "Secondary" }
+          ]
         },
         {
           "type": "range",
