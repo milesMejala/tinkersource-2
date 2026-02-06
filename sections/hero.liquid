@@ -71,7 +71,6 @@
     color: var(--heading-color);
   }
   .button {
-    border: 2px solid transparent;
     border-radius: var(--corner-radius);
     font-size: var(--text-size);
     padding: 15px 22px;
@@ -82,11 +81,13 @@
   .button.primary {
     background-color: var(--color-button);
     color: var(--color-button-label);
+    border: 2px solid;
     border-color: var(--color-button-border);
   }
   .button.secondary {
-    background-color: var(--color-secondary-button);
+    background-color: transparent;
     color: var(--color-secondary-button-label);
+    border: 2px solid;
     border-color: var(--color-secondary-button-border);
   }
 {% endstylesheet %}
