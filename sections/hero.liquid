@@ -24,7 +24,7 @@
       {% endif %}
       {% if block.type == 'button' %}
         <button
-          class="button {{ block.settings.button_type }}"
+          class="button {{ block.settings.button_type }} color-{{ block.settings.button_color_scheme }}"
           style="
             --text-size: {{ block.settings.button_text_size }}px;
             --corner-radius: {{ block.settings.corner_radius }}px;
@@ -71,8 +71,23 @@
     color: var(--heading-color);
   }
   .button {
+    border: 2px solid transparent;
     border-radius: var(--corner-radius);
     font-size: var(--text-size);
+    padding: 15px 22px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .button.primary {
+    background-color: var(--color-button);
+    color: var(--color-button-label);
+    border-color: var(--color-button-border);
+  }
+  .button.secondary {
+    background-color: var(--color-secondary-button);
+    color: var(--color-secondary-button-label);
+    border-color: var(--color-secondary-button-border);
   }
 {% endstylesheet %}
 
@@ -158,6 +173,12 @@
             { "value": "primary", "label": "Primary" },
             { "value": "secondary", "label": "Secondary" }
           ]
+        },
+        {
+          "type": "color_scheme",
+          "id": "button_color_scheme",
+          "default": "scheme_1",
+          "label": "Color Scheme"
         },
         {
           "type": "range",
