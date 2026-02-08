@@ -1,0 +1,59 @@
+<div
+  class="rich-text"
+  style="
+    font-size: {{ block.settings.font_size }}px;
+    border-color: {{ block.settings.border_color }};
+  "
+>
+  {{ block.settings.inline_richtext }}
+</div>
+
+{% stylesheet %}
+  .rich-text {
+    height: 175px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-top: 20px;
+    border-bottom: 20px;
+    border-left: 0;
+    border-right: 0;
+    border-style: solid;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Rich Text",
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "inline_richtext",
+      "label": "Rich Text",
+      "default": "my <i>inline</i> <b>text</b>"
+    },
+    {
+      "type": "range",
+      "id": "font_size",
+      "label": "Font Size",
+      "default": 16,
+      "min": 12,
+      "max": 100,
+      "step": 1,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border Color",
+      "default": "#000000"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Rich Text"
+    }
+  ]
+}
+{% endschema %}

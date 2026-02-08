@@ -23,7 +23,8 @@
           "settings": {
             "heading": "Build Your Own Ultralight Aircraft",
             "heading_size": 48,
-            "heading_level": "h1"
+            "heading_level": "h1",
+            "color": "#fafafa"
           }
         },
         "button_kNLepb": {
@@ -31,7 +32,8 @@
           "settings": {
             "button_text": "Get Plans",
             "button_url": "",
-            "color_scheme": "scheme_1",
+            "button_type": "secondary",
+            "button_color_scheme": "",
             "button_text_size": 24,
             "corner_radius": 12
           }
