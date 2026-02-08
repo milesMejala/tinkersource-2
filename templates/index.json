@@ -47,13 +47,84 @@
       "name": "Hero",
       "settings": {}
     },
-    "main": {
-      "type": "hello-world",
+    "custom_section_YHQW9X": {
+      "type": "custom-section",
+      "blocks": {
+        "rich_text_TkUQ8i": {
+          "type": "rich-text",
+          "name": "Rich Text",
+          "settings": {
+            "inline_richtext": "<strong>Build Your Own Ultralight Helicopter</strong>",
+            "font_size": 36,
+            "border_color": "#03045e"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "rich_text_TkUQ8i"
+      ],
+      "name": "t:general.custom_section",
+      "settings": {}
+    },
+    "landingproduct_showcase_6QnAba": {
+      "type": "landingproduct-showcase",
+      "blocks": {
+        "description": {
+          "type": "content-spotlight-description",
+          "static": true,
+          "settings": {},
+          "blocks": {
+            "heading": {
+              "type": "heading",
+              "static": true,
+              "settings": {
+                "heading": "Sample heading",
+                "heading_level": "h1"
+              },
+              "blocks": {}
+            },
+            "text": {
+              "type": "text",
+              "static": true,
+              "settings": {
+                "text": "Text",
+                "text_style": "text--title",
+                "alignment": "left"
+              },
+              "blocks": {}
+            },
+            "button": {
+              "type": "button",
+              "static": true,
+              "settings": {
+                "button_text": "My Button",
+                "button_text_size": 16,
+                "button_color_scheme": "",
+                "corner_radius": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": []
+        },
+        "spotlight-image": {
+          "type": "image",
+          "static": true,
+          "settings": {
+            "image": "shopify://shop_images/adams-wilson-hobbycopter-pic1-upscaled.png",
+            "corner_radius": 0
+          },
+          "blocks": {}
+        }
+      },
+      "name": "Product Showcase",
       "settings": {}
     }
   },
   "order": [
     "hero_cmkBw6",
-    "main"
+    "custom_section_YHQW9X",
+    "landingproduct_showcase_6QnAba"
   ]
 }

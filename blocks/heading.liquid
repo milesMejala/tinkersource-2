@@ -5,11 +5,14 @@
   assign heading_tag = block.settings.heading_level | default: 'h1'
 %}
 
-<{{ heading_tag }} {{ block.shopify_attributes }}>
+<{{ heading_tag }} class="block-heading" {{ block.shopify_attributes }}>
   {{ block.settings.heading | escape }}
 </{{ heading_tag }}>
 
 {% stylesheet %}
+  .block-heading {
+    text-wrap: balance;
+  }
 {% endstylesheet %}
 
 {% schema %}

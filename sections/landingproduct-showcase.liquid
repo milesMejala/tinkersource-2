@@ -1,18 +1,25 @@
 <section class="landingproduct-showcase-section">
   <div class="landingproduct-showcase-container">
-    {% content_for 'block', type: 'content-spotlight-description', id: 'description' %}
+    <div class="spotlight-description">
+      {% content_for 'block', type: 'content-spotlight-description', id: 'description' %}
+    </div>
     {% content_for 'block', type: 'image', id: 'spotlight-image' %}
   </div>
 </section>
 
-{% stylesheet %}
+{% style %}
   .landingproduct-showcase-container {
+    padding: 128px 0 128px 0;
     display: flex;
-    flex-direction: row;
     gap: 1rem;
+    flex-direction: row;
     justify-content: center;
+    align-items: center;
   }
-{% endstylesheet %}
+  .spotlight-description {
+    max-width: 592px;
+  }
+{% endstyle %}
 
 {% schema %}
 {

@@ -1,16 +1,16 @@
 {% render 'image',
   image: block.settings.image,
-  width: 296,
-  height: 296,
+  width: block.settings.image_width,
+  height: block.settings.image_height,
   class: 'block-image',
   corner_radius: block.settings.corner_radius
 %}
 
-{% stylesheet %}
+{% style %}
   .block-image {
     border-radius: var(--corner-radius);
   }
-{% endstylesheet %}
+{% endstyle %}
 
 {% schema %}
 {
@@ -20,6 +20,20 @@
       "type": "image_picker",
       "id": "image",
       "label": "Image"
+    },
+    {
+      "type": "number",
+      "id": "image_width",
+      "label": "Image width (px)",
+      "default": 296,
+      "info": "Recommended: 50-1000px"
+    },
+    {
+      "type": "number",
+      "id": "image_height",
+      "label": "Image height (px)",
+      "default": 296,
+      "info": "Recommended: 50-1000px"
     },
     {
       "type": "range",

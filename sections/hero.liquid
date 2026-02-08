@@ -12,7 +12,7 @@
           assign heading_tag = block.settings.heading_level
         %}
         <{{ heading_tag }}
-          class="heading"
+          class="section-heading"
           style="
             --heading-font-size: {{ block.settings.heading_size }}px;
             --heading-color: {{ block.settings.color }};
@@ -38,7 +38,7 @@
   </div>
 </div>
 
-{% stylesheet %}
+{% style %}
   .hero-section {
     height: calc(100vh);
     position: relative;
@@ -65,7 +65,7 @@
     left: 5%;
     z-index: 1;
   }
-  .heading {
+  .section-heading {
     font-size: var(--heading-font-size);
     margin-bottom: 12px;
     color: var(--heading-color);
@@ -95,7 +95,7 @@
     border-color: transparent;
     background-color: var(--color-button);
   }
-{% endstylesheet %}
+{% endstyle %}
 
 {% schema %}
 {
