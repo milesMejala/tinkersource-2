@@ -1,41 +1,121 @@
-<footer>
-  <div class="footer__copyright">
-    &copy;
-    {{ 'now' | date: '%Y' }}
-    {{ shop.name | link_to: routes.root_url }}, {{ powered_by_link }}
-  </div>
+<footer class="footer color-{{ section.settings.color_scheme }}">
+  <div class="footer__container">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <span class="footer__shop-name">{{ shop.name }}</span>
+      </div>
+      <nav class="footer__links">
+        {% for link in section.settings.menu.links %}
+          <a href="{{ link.url }}" class="footer__link">{{ link.title }}</a>
+        {% endfor %}
+      </nav>
+    </div>
 
-  <div class="footer__links">
-    {% for link in section.settings.menu.links %}
-      {{ link.title | link_to: link.url }}
-    {% endfor %}
-  </div>
+    <div class="footer__divider"></div>
 
-  <div class="footer__payment">
-    {% if section.settings.show_payment_icons %}
-      {% for type in shop.enabled_payment_types %}
-        {{ type | payment_type_svg_tag }}
-      {% endfor %}
-    {% endif %}
+    <div class="footer__bottom">
+      <div class="footer__copyright">
+        &copy; {{ 'now' | date: '%Y' }}
+        {{ shop.name }}. All rights reserved.
+      </div>
+      <div class="footer__payment">
+        {% if section.settings.show_payment_icons %}
+          {% for type in shop.enabled_payment_types %}
+            {{ type | payment_type_svg_tag }}
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
   </div>
 </footer>
 
-{% stylesheet %}
-  footer {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 2rem;
-  }
-  footer a {
-    text-decoration: none;
+{% style %}
+  .footer {
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    background-color: var(--color-background);
     color: var(--color-foreground);
   }
-  footer .footer__links,
-  footer .footer__payment {
-    display: flex;
-    gap: 1rem;
+  .footer__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 40px 40px 40px;
   }
-{% endstylesheet %}
+
+  /* Top row: brand + nav links */
+  .footer__top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer__shop-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .footer__links {
+    display: flex;
+    gap: 1.5rem;
+  }
+  .footer__link {
+    text-decoration: none;
+    color: var(--color-foreground);
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+    font-size: 0.9rem;
+  }
+  .footer__link:hover {
+    opacity: 1;
+  }
+
+  /* Divider */
+  .footer__divider {
+    height: 1px;
+    background-color: rgba(0, 0, 0, 0.08);
+    margin: 32px 0;
+  }
+
+  /* Bottom row: copyright + payment */
+  .footer__bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer__copyright {
+    font-size: 0.85rem;
+    opacity: 0.5;
+  }
+  .footer__payment {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+  .footer__payment svg {
+    width: 2.25rem;
+    height: auto;
+    opacity: 0.6;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .footer__container {
+      padding: 40px 20px 32px 20px;
+    }
+    .footer__top {
+      flex-direction: column;
+      gap: 1.5rem;
+      text-align: center;
+    }
+    .footer__links {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .footer__bottom {
+      flex-direction: column;
+      gap: 1rem;
+      text-align: center;
+    }
+  }
+{% endstyle %}
 
 {% schema %}
 {
@@ -45,6 +125,12 @@
       "type": "link_list",
       "id": "menu",
       "label": "t:labels.menu"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color Scheme",
+      "default": "scheme_1"
     },
     {
       "type": "checkbox",

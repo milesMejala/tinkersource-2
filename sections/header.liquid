@@ -4,6 +4,9 @@
     style="background-color: transparent;"
   {% endif %}
 >
+  <button type="button" class="header__mobile-toggle" aria-label="Menu">
+    {% render 'icon', icon: 'menu', size: 24 %}
+  </button>
   <h2 class="header__title">
     {{ shop.name | link_to: routes.root_url }}
   </h2>
@@ -49,34 +52,73 @@
       {{ 'icon-cart.svg' | inline_asset_content }}
     </a>
   </div>
+  <div class="header__mobile-drawer">
+    <div class="header__mobile-drawer-header">
+      <h2 class="header__mobile-drawer-title">{{ shop.name }}</h2>
+      <button type="button" class="header__mobile-close" aria-label="Close menu">
+        {% render 'icon', icon: 'close', size: 24 %}
+      </button>
+    </div>
+    <nav class="header__mobile-menu">
+      {% for link in section.settings.menu.links %}
+        <div class="mobile-nav-item">
+          <a href="{{ link.url }}" class="mobile-nav-link">
+            {{ link.title }}
+          </a>
+          {% if link.links != blank %}
+            <div class="mobile-dropdown">
+              {% for child_link in link.links %}
+                <a href="{{ child_link.url }}" class="mobile-dropdown-link"> - {{ child_link.title }} </a>
+              {% endfor %}
+            </div>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </nav>
+  </div>
 </header>
 
 <script>
   const header = document.querySelector('header');
   const dropdowns = document.querySelectorAll('.dropdown');
+  const mobileToggle = document.querySelector('.header__mobile-toggle');
+  const mobileClose = document.querySelector('.header__mobile-close');
+  const mobileDrawer = document.querySelector('.header__mobile-drawer');
   const isTransparent = {{ section.settings.transparent_header | json }};
+
+  function toggleMobileMenu() {
+    mobileDrawer.classList.toggle('is-active');
+    document.body.style.overflow = mobileDrawer.classList.contains('is-active') ? 'hidden' : '';
+  }
+
+  if (mobileToggle) mobileToggle.addEventListener('click', toggleMobileMenu);
+  if (mobileClose) mobileClose.addEventListener('click', toggleMobileMenu);
+
+  function setHeaderColors(color) {
+    header.querySelectorAll('a').forEach((link) => {
+      link.style.color = color;
+    });
+    // Also update the mobile toggle button color
+    if (mobileToggle) mobileToggle.style.color = color;
+  }
 
   // Only apply white text color if transparent header is enabled
   if (isTransparent) {
-    header.querySelectorAll('a').forEach((link) => {
-      link.style.color = '#fafafa';
-    });
+    setHeaderColors('#fafafa');
 
     window.addEventListener('scroll', () => {
       if (window.scrollY > 1) {
         header.style.backgroundColor = 'var(--color-background)';
-        header.querySelectorAll('a').forEach((link) => {
-          link.style.color = 'var(--color-foreground)';
-        });
+        setHeaderColors('var(--color-foreground)');
+
         // Update all dropdowns
         dropdowns.forEach((dropdown) => {
           dropdown.style.backgroundColor = 'var(--color-background)';
         });
       } else {
         header.style.backgroundColor = 'transparent';
-        header.querySelectorAll('a').forEach((link) => {
-          link.style.color = '#fafafa';
-        });
+        setHeaderColors('#fafafa');
+
         // Reset all dropdowns to transparent
         dropdowns.forEach((dropdown) => {
           dropdown.style.backgroundColor = 'transparent';
@@ -183,6 +225,91 @@
 
   .dropdown-link:hover {
     background-color: rgba(0, 0, 0, 0.05);
+  }
+  .dropdown-link:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+
+  /* Mobile styles */
+  .header__mobile-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--color-foreground);
+    padding: 0;
+  }
+
+  .header__mobile-drawer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 300px;
+    height: 100vh;
+    background-color: var(--color-background);
+    z-index: 200;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .header__mobile-drawer.is-active {
+    transform: translateX(0);
+  }
+
+  .header__mobile-drawer-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .header__mobile-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--color-foreground);
+  }
+
+  .header__mobile-menu {
+    padding: 1rem 0;
+    overflow-y: auto;
+  }
+
+  .mobile-nav-link {
+    display: block;
+    padding: 0.75rem 1.5rem;
+    text-decoration: none;
+    color: var(--color-foreground) !important;
+    font-size: 1.1rem;
+    font-weight: 500;
+  }
+
+  .mobile-dropdown-link {
+    display: block;
+    padding: 0.5rem 1.5rem 0.5rem 2.5rem;
+    text-decoration: none;
+    color: var(--color-foreground) !important;
+    opacity: 0.8;
+  }
+
+  @media screen and (max-width: 990px) {
+    header {
+      padding: 0 1.5rem;
+      height: 4rem;
+    }
+    .header__menu {
+      display: none !important; /* Force hide desktop menu */
+    }
+    .header__mobile-toggle {
+      display: block;
+    }
+    .header__title {
+      font-size: 1.25rem;
+    }
   }
 {% endstyle %}
 
