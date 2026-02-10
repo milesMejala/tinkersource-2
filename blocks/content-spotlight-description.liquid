@@ -6,19 +6,40 @@
 
 {% style %}
   .description {
-    height: 296px;
+    min-height: 296px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: 24px;
-  }
-  .description > :nth-child(3) {
-    margin-top: auto;
+    align-items: {% if block.settings.alignment == 'left' %}flex-start{% elsif block.settings.alignment == 'right' %}flex-end{% else %}center{% endif %};
   }
 {% endstyle %}
 
 {% schema %}
 {
   "name": "Description",
+  "settings": [
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "Alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left"
+    }
+  ],
   "blocks": [
     {
       "type": "heading"

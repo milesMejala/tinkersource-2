@@ -14,7 +14,7 @@
         <a href="{{ link.url }}" class="nav-link">
           {{ link.title }}
           {% if link.links != blank %}
-            <span class="dropdown-arrow">▼</span>
+            <span class="dropdown-arrow"></span>
           {% endif %}
         </a>
 
@@ -137,12 +137,18 @@
   }
 
   .dropdown-arrow {
-    font-size: 0.6rem;
+    display: inline-block;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(45deg);
     transition: transform 0.3s ease;
+    margin-left: 0.25rem;
   }
 
   .nav-item:hover .dropdown-arrow {
-    transform: rotate(180deg);
+    transform: rotate(225deg);
   }
 
   .dropdown {

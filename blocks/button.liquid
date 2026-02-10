@@ -8,7 +8,7 @@
   {{ block.settings.button_text | default: block.settings.button_text.default }}
 </button>
 
-{% stylesheet %}
+{% style %}
   .button {
     border: none;
     border-radius: var(--corner-radius);
@@ -20,7 +20,7 @@
     background-color: var(--color-button);
     color: var(--color-button-label);
   }
-{% endstylesheet %}
+{% endstyle %}
 
 {% schema %}
 {

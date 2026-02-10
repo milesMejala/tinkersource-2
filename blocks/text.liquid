@@ -7,7 +7,7 @@
 
 <div
   class="text {{ block.settings.text_style }}"
-  style="--text-align: {{ block.settings.alignment }}"
+  style="--text-align: {{ block.settings.alignment }}; --text-wrap: {% if block.settings.enable_text_wrap_balance %}balance{% else %}wrap{% endif %};"
   {{ block.shopify_attributes }}
 >
   {{ block.settings.text }}
@@ -16,6 +16,7 @@
 {% style %}
   .text {
     text-align: var(--text-align);
+    text-wrap: var(--text-wrap);
   }
   .text--title {
     font-size: 2rem;
@@ -52,6 +53,13 @@
       "id": "alignment",
       "label": "t:labels.alignment",
       "default": "left"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_text_wrap_balance",
+      "label": "Enable text wrap balance",
+      "default": false,
+      "info": "Balances the length of text lines when they wrap for a more visually pleasing appearance"
     }
   ],
   "presets": [{ "name": "t:general.text" }]

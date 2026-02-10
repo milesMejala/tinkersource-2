@@ -1,5 +1,12 @@
 <section class="landingproduct-showcase-section">
-  <div class="landingproduct-showcase-container">
+  <div
+    class="landingproduct-showcase-container"
+    style="
+      --flex-direction: {% if section.settings.reverse_layout %}row-reverse{% else %}row{% endif %};
+      --padding-top: {{ section.settings.padding_top }}px;
+      --padding-bottom: {{ section.settings.padding_bottom }}px;
+    "
+  >
     <div class="spotlight-description">
       {% content_for 'block', type: 'content-spotlight-description', id: 'description' %}
     </div>
@@ -9,21 +16,97 @@
 
 {% style %}
   .landingproduct-showcase-container {
-    padding: 128px 0 128px 0;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--padding-top) 40px var(--padding-bottom) 40px;
     display: flex;
-    gap: 1rem;
-    flex-direction: row;
+    gap: 3rem;
+    flex-direction: var(--flex-direction);
     justify-content: center;
     align-items: center;
   }
   .spotlight-description {
     max-width: 592px;
+    position: relative;
+  }
+
+  /* Decorative accent bar */
+  .spotlight-description::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 4px;
+    background: var(--color-button, #333);
+    border-radius: 2px;
+    margin-bottom: 20px;
+  }
+
+  /* Typographic hierarchy — heading gets emphasis, body text is muted */
+  .spotlight-description .block-heading {
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+  .spotlight-description .text {
+    opacity: 0.7;
+    line-height: 1.6;
+  }
+
+  /* Button lift on hover */
+  .spotlight-description .button {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
+  }
+  .spotlight-description .button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  }
+
+  .landingproduct-showcase-container .block-image {
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+  }
+
+  @media (max-width: 768px) {
+    .landingproduct-showcase-container {
+      flex-direction: column;
+      padding: calc(var(--padding-top) * 0.5) 20px calc(var(--padding-bottom) * 0.5) 20px;
+      gap: 2rem;
+    }
   }
 {% endstyle %}
 
 {% schema %}
 {
   "name": "Product Showcase",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "reverse_layout",
+      "label": "Reverse layout",
+      "default": false,
+      "info": "When enabled, image appears on the left and description on the right"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 8,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 128
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 8,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 128
+    }
+  ],
   "blocks": [
     {
       "type": "content-spotlight-description"
