@@ -40,7 +40,9 @@
 
 {% style %}
   .hero-section {
-    height: calc(100vh);
+    height: 100vh; /* Fallback */
+    height: 100dvh;
+    min-height: 480px;
     position: relative;
   }
   .hero-section .image::before {
@@ -64,11 +66,13 @@
     top: 75%;
     left: 5%;
     z-index: 1;
+    max-width: 90%;
   }
   .section-heading {
     font-size: var(--heading-font-size);
     margin-bottom: 12px;
     color: var(--heading-color);
+    line-height: 1.2;
   }
   .button {
     border-radius: var(--corner-radius);
@@ -94,6 +98,23 @@
     color: var(--color-secondary-button-border);
     border-color: transparent;
     background-color: var(--color-button);
+  }
+
+  /* Mobile Responsiveness */
+  @media screen and (max-width: 768px) {
+    .hero-content {
+      top: auto;
+      bottom: 15%; /* Position from bottom on mobile */
+      left: 5%;
+      right: 5%;
+    }
+    .section-heading {
+      font-size: calc(var(--heading-font-size) * 0.6); /* Scale down font */
+    }
+    .button {
+      padding: 12px 20px;
+      font-size: calc(var(--text-size) * 0.9);
+    }
   }
 {% endstyle %}
 

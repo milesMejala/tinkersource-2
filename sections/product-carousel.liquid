@@ -10,7 +10,6 @@
   data-autoplay="{{ section.settings.autoplay }}"
   data-autoplay-speed="{{ section.settings.autoplay_speed }}"
   style="
-    --slides-per-view: {{ slides_per_view }};
     --card-corner-radius: {{ section.settings.corner_radius }}px;
     --section-padding-top: {{ section.settings.padding_top }}px;
     --section-padding-bottom: {{ section.settings.padding_bottom }}px;
@@ -102,6 +101,7 @@
 
 {% style %}
   .product-carousel {
+    --slides-per-view: {{ slides_per_view }};
     padding: var(--section-padding-top) var(--section-padding-right) var(--section-padding-bottom)
       var(--section-padding-left);
     background-color: var(--color-background);
@@ -248,17 +248,26 @@
 
   @media (max-width: 749px) {
     .product-carousel {
-      --slides-per-view: 2;
+      --slides-per-view: 2.2; /* Show a peek of 3rd */
+      /* Override massive padding on mobile */
+      padding-left: 16px !important;
+      padding-right: 16px !important;
+      padding-top: 32px;
+      padding-bottom: 32px;
     }
 
     .product-carousel__heading {
       font-size: 1.25rem;
     }
+
+    .product-carousel__nav {
+      display: none; /* Hide arrows on mobile, rely on swipe */
+    }
   }
 
   @media (max-width: 479px) {
     .product-carousel {
-      --slides-per-view: 1.2;
+      --slides-per-view: 1; /* Show 1 full slide */
     }
   }
 {% endstyle %}
@@ -309,7 +318,7 @@
     {
       "type": "range",
       "id": "slides_per_view",
-      "min": 2,
+      "min": 1,
       "max": 5,
       "step": 1,
       "default": 4,
