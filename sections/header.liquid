@@ -62,9 +62,16 @@
     <nav class="header__mobile-menu">
       {% for link in section.settings.menu.links %}
         <div class="mobile-nav-item">
-          <a href="{{ link.url }}" class="mobile-nav-link">
-            {{ link.title }}
-          </a>
+          <div class="mobile-nav-link-wrapper">
+            <a href="{{ link.url }}" class="mobile-nav-link">
+              {{ link.title }}
+            </a>
+            {% if link.links != blank %}
+              <button type="button" class="mobile-menu-toggle-btn">
+                <span class="dropdown-arrow"></span>
+              </button>
+            {% endif %}
+          </div>
           {% if link.links != blank %}
             <div class="mobile-dropdown">
               {% for child_link in link.links %}
@@ -93,6 +100,22 @@
 
   if (mobileToggle) mobileToggle.addEventListener('click', toggleMobileMenu);
   if (mobileClose) mobileClose.addEventListener('click', toggleMobileMenu);
+
+  // Mobile Accordion Logic
+  const mobileAccordionToggles = document.querySelectorAll('.mobile-menu-toggle-btn');
+  mobileAccordionToggles.forEach(toggle => {
+    toggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      const dropdown = toggle.closest('.mobile-nav-item').querySelector('.mobile-dropdown');
+      const arrow = toggle.querySelector('.dropdown-arrow');
+
+      if (dropdown) {
+        const isOpen = dropdown.style.display === 'block';
+        dropdown.style.display = isOpen ? 'none' : 'block';
+        arrow.style.transform = isOpen ? 'rotate(45deg)' : 'rotate(225deg)';
+      }
+    });
+  });
 
   function setHeaderColors(color) {
     header.querySelectorAll('a').forEach((link) => {
@@ -280,20 +303,59 @@
   }
 
   .mobile-nav-link {
-    display: block;
-    padding: 0.75rem 1.5rem;
     text-decoration: none;
     color: var(--color-foreground) !important;
     font-size: 1.1rem;
     font-weight: 500;
+    padding: 1rem 0 1rem 1.5rem; /* Increased vertical padding */
+    display: flex;
+    align-items: center;
+  }
+
+  .mobile-nav-link-wrapper {
+    display: flex;
+    justify-content: flex-start; /* Align left */
+    align-items: stretch; /* Full height items */
+    padding: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05); /* Separator */
+  }
+
+  .mobile-menu-toggle-btn {
+    background: none;
+    border: none;
+    padding: 0 1.5rem 0 0.5rem; /* Closer to text, touch target flows right */
+    cursor: pointer;
+    color: var(--color-foreground);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: stretch; /* Ensure full height */
+  }
+
+  .mobile-menu-toggle-btn .dropdown-arrow {
+    margin-left: 0; /* Reset desktop margin */
+  }
+
+  /* Override padding for link since it's now in a wrapper handling padding */
+  .mobile-nav-item .mobile-nav-link {
+    padding: 1rem 0 1rem 1.5rem;
+  }
+
+  .mobile-dropdown {
+    display: none; /* Hidden by default */
+    background-color: rgba(0, 0, 0, 0.02); /* Slight background for nested */
   }
 
   .mobile-dropdown-link {
     display: block;
-    padding: 0.5rem 1.5rem 0.5rem 2.5rem;
+    padding: 0.75rem 1.5rem 0.75rem 3rem; /* More indentation */
     text-decoration: none;
     color: var(--color-foreground) !important;
     opacity: 0.8;
+  }
+
+  .mobile-nav-item:last-child .mobile-nav-link-wrapper {
+    border-bottom: none;
   }
 
   @media screen and (max-width: 990px) {
